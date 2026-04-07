@@ -18,7 +18,7 @@ const severityRadius = {
 };
 
 export default function AlertMap({ alerts = [], height = '400px' }) {
-  const [center, setCenter] = useState([39.8283, -98.5795]); // US center
+  const [center, setCenter] = useState([20.5937, 78.9629]); // India center
   const [zoom, setZoom] = useState(4);
 
   // Auto-center on first valid alert
