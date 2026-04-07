@@ -1,10 +1,25 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || import.meta.env.VITE_API_URL || 'https://weather-back-rpdv.onrender.com/api';
+const getApiUrl = () => {
+  let url = 'https://weather-back-rpdv.onrender.com';
+  if (typeof process !== 'undefined' && process.env && process.env.REACT_APP_API_URL) {
+    url = process.env.REACT_APP_API_URL;
+  } else if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) {
+    url = import.meta.env.VITE_API_URL;
+  }
+  
+  // Ensure the backend URL cleanly maps to the /api route schema
+  if (url && !url.endsWith('/api')) {
+    url = url.replace(/\/$/, '') + '/api';
+  }
+  return url;
+};
+
+const API_BASE_URL = getApiUrl();
 
 // Create axios instance
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || API_BASE_URL,
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   }
