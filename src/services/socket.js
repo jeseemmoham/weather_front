@@ -1,6 +1,10 @@
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = (typeof process !== 'undefined' && process.env.REACT_APP_API_URL) 
+  ? process.env.REACT_APP_API_URL.replace(/\/api\/?$/, '') 
+  : (import.meta.env && import.meta.env.VITE_API_URL 
+      ? import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '') 
+      : 'https://weather-back-rpdv.onrender.com');
 
 let socket = null;
 
