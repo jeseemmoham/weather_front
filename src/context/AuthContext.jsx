@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
         try {
           setUser(JSON.parse(savedUser));
 
-          const res = await axios.get(`${API_URL}/api/profile`, {
+          const res = await axios.get(`${API_URL}/auth/me`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
 
-      const res = await axios.post(`${API_URL}/api/signup`, {
+      const res = await axios.post(`${API_URL}/auth/register`, {
         name,
         email,
         password,
@@ -75,7 +75,7 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
 
-      const res = await axios.post(`${API_URL}/api/login`, {
+      const res = await axios.post(`${API_URL}/auth/login`, {
         email,
         password
       });
@@ -109,7 +109,7 @@ export function AuthProvider({ children }) {
       const token = localStorage.getItem('token');
 
       const res = await axios.put(
-        `${API_URL}/api/user/zip`,
+        `${API_URL}/users/zipcode`,
         { zipCode },
         {
           headers: {
@@ -137,7 +137,7 @@ export function AuthProvider({ children }) {
       const token = localStorage.getItem('token');
 
       const res = await axios.put(
-        `${API_URL}/api/user/profile`,
+        `${API_URL}/users/profile`,
         data,
         {
           headers: {
